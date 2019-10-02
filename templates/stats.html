@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>1 Song a Day Playlist Comparison</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>1 Song a Day Playlist Comparison</h1> 
+      <ul class="nav justify-content-center nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link active" href="{{ url_for('stats') }}">Homepage</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('playlists') }}">Playlists</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('tops') }}">Tops</a>
+          </li>
+      </ul>
+      <div class="row">
+        <div class="col-12">
+            <div class="table-responsive">
+                <h2>Days where songs added were the same</h2>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Artists</th>
+                            <th>Song</th>
+                            <th>Day</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in same_day %}
+                            <tr>
+                              <td>{% for artists in item["artists"] %} 
+                                {% if (loop.index ) == item["artists"]|length %}
+                                    {{ artists }}  
+                                {% endif %}
+                                {% if (loop.index ) != item["artists"]|length %}
+                                  {{ artists}}, 
+                                {% endif %}  
+                              {% endfor %}</td>
+                                <td>{{ item["song"] }} </td>
+                                <td>{{ item["date"] }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>       
+        </div>
+      </div>
+
+      <br></br>
+      <p>
+        <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">{{nr_equal_songs}} Equal Songs</a>
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">{{ nr_equal_artists }} Equal Artists</button>
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#multiCollapseExample3" aria-expanded="false" aria-controls="multiCollapseExample3"> {{nr_equal_albums}} Equal Albums</button>
+      </p>
+        <div class="row">
+          <div class="col">
+            <div class="collapse multi-collapse" id="multiCollapseExample1">
+              <div class="card card-body">
+                <ul class="list-group list-group-flush">
+                  {% for item in same_songs %}
+                    <li class="list-group-item"> {{ item }} </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="collapse multi-collapse" id="multiCollapseExample2">
+              <div class="card card-body">
+                <ul class="list-group list-group-flush">
+                  {% for item in same_artists %}
+                    <li class="list-group-item"> {{ item }} </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+              <div class="collapse multi-collapse" id="multiCollapseExample3">
+                <div class="card card-body">
+                  <ul class="list-group list-group-flush">
+                    {% for item in same_albums %}
+                      <li class="list-group-item"> {{ item }} </li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> 
+      
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
