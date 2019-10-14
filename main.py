@@ -191,9 +191,6 @@ def playlists():
     with open('playlist_pedro.json','r') as jsonfile2:
         playlist2 = json.load(jsonfile2)
     
-    print(top_artists(playlist1,10))
-    print(same_day_songs(playlist1,playlist2))
-
     return render_template("playlists.html", playlist=list(zip(playlist1["data"],playlist2["data"])), 
                             nr_andre = len(playlist1["data"]), nr_pedro = len(playlist2["data"]), 
                             sorted_array_andre=playlist1["data"], sorted_array_pedro=playlist2["data"])
