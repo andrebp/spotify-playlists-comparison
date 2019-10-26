@@ -8,6 +8,10 @@
 
 Create a file `client.py` and insert your client id and secret. After running the program, open `localhost:8888` on your browser.
 
+## To Do
+* Add release year of song to stats
+* Add genre stats
+
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
 
